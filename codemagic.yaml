@@ -1,0 +1,17 @@
+workflows:
+  android-workflow:
+    name: Android Workflow
+    instance_type: linux
+    max_build_duration: 60
+    environment:
+      java: 11
+      ndk: 21.4.7075529
+    triggering:
+      events:
+        - push
+    scripts:
+      - name: Build APK
+        script: |
+          ./gradlew assembleRelease
+    artifacts:
+      - build/outputs/apk/**/*.apk
